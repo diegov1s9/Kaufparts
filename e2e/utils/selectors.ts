@@ -7,10 +7,21 @@ import { Page } from "@playwright/test";
 
 export const selectors = {
   home: {
-    // Ejemplos de referencia; reemplazar por tus selectores reales
-    mainHeading: (page: Page) => page.getByRole("heading", { level: 1 }),
-    primaryButton: (page: Page) =>
-      page.getByRole("button", { name: /continuar/i }),
+    categoriesSection: (page: Page) =>
+      page.getByRole("heading", { name: /compra por categor/i }),
+    categoriesList: (page: Page) =>
+      page.getByRole("list", { name: /categorías/i }),
+    categoryButton: (page: Page, name: string) =>
+      page
+        .getByRole("list", { name: /categorías/i })
+        .getByRole("button", { name: new RegExp(name, "i") }),
+    verTodosLinks: (page: Page) =>
+      page.getByRole("link", { name: /ver todos/i }),
+  },
+  categoryPage: {
+    heading: (page: Page) => page.getByRole("heading", { level: 1 }),
+    firstProductItem: (page: Page) =>
+      page.locator("h4.product-price").first(),
   },
   productDetail: {
     internalDescription: (page: Page) =>

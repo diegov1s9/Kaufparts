@@ -23,6 +23,21 @@ export const routes = {
   home: "/",
 };
 
+export const home = {
+  url: "https://www.kaufparts.cl",
+};
+
+export const categories = [
+  { name: "Fluidos y Lubricantes", code: "KC10" },
+  { name: "Baterías", code: "KC05" },
+  { name: "Neumáticos", code: "KC09" },
+  { name: "Boutique y Merchandising", code: "KC12" },
+  { name: "Rodados", code: "KC13" },
+  { name: "Accesorios y Mantenimiento", code: "KC11" },
+  { name: "Sistema de Frenos", code: "KC03" },
+  { name: "Transmisión y Tracción", code: "KC02" },
+];
+
 export const products = {
   sensorDistanceParktronic: {
     id: "A01566",
