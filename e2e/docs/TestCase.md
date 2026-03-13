@@ -44,11 +44,11 @@ Alta
 
 **Resultado Esperado**
 
-- ✓ Formulario Typeform carga correctamente
-- ✓ Datos capturados correctamente
-- ✓ Ticket interno creado para venta asistida
-- ✓ Email de confirmación de solicitud recibido
-- ✓ Presupuesto elaborado y enviado por ejecutivo
+- Formulario Typeform carga correctamente
+- Datos capturados correctamente
+- Ticket interno creado para venta asistida
+- Email de confirmación de solicitud recibido
+- Presupuesto elaborado y enviado por ejecutivo
 
 ---
 
@@ -472,3 +472,86 @@ Cantidades a validar: **1** (inicial), **3** (cambio), **0** (después de elimin
 - Este test case valida tanto la actualización dinámica de precios como la gestión completa del carrito.
 - El icono del carrito en el header siempre refleja el total actual del carrito.
 - Cuando se elimina el último producto, el carrito se vacía completamente y muestra un estado alternativo.
+
+---
+
+# TC-E2E-001: Validar búsqueda de repuesto desde el buscador principal
+
+**TC ID**  
+TC-E2E-001
+
+**Descripción**  
+Validar la búsqueda de repuesto "disco de freno" desde el buscador principal de kaufparts.cl
+
+**Proceso de Negocio**  
+Búsqueda de Repuestos
+
+**Sub-Proceso**  
+Búsqueda por nombre de repuesto en buscador principal
+
+**Prioridad**  
+Alta
+
+**Datos de Prueba**  
+- Término de búsqueda: "disco de freno"  
+- Repuesto esperado: Disco de freno  
+- Base de datos: Activa con registros disponibles  
+- Cantidad de resultados esperada: Mayor a 0
+
+**Pasos de la Prueba**  
+1. Ingresar a kaufparts.cl (QA: https://qas.kaufparts.cl/).  
+2. Visualizar página de inicio completamente cargada.  
+3. Localizar buscador principal con placeholder "Nombre o código de repuesto...".  
+4. Hacer clic en el campo de búsqueda.  
+5. Ingresar texto: "disco de freno".  
+6. Verificar que se despliega dropdown con sugerencias de autocompletado.  
+7. Seleccionar opción "disco de frenos" del dropdown o presionar Enter.  
+8. Aguardar carga de resultados de búsqueda.  
+9. Verificar que la URL cambió a: /search/disco%20de%20frenos?query=disco%20de%20frenos.  
+10. Validar que aparece título de búsqueda "disco de frenos" en la página.  
+11. Verificar cantidad total de resultados mostrada ("357 resultados").  
+12. Validar que se muestran productos disponibles (EN STOCK).  
+13. Verificar información de cada producto:  
+    - Marca y modelo  
+    - Código de producto  
+    - Nombre del repuesto  
+    - Precio original y precio con descuento  
+    - Porcentaje de descuento  
+    - Opción de pago en cuotas (12 cuotas)  
+    - Disponibilidad de envío gratis  
+14. Validar que existen controles de filtrado en panel izquierdo:  
+    - Categoría  
+    - Subcategoría  
+    - Marca  
+    - Modelo  
+    - Año  
+    - Ancho  
+    - Perfil  
+    - Radio  
+    - Formato del envase  
+    - Ofertas  
+    - CCA  
+    - Volts  
+    - Estado de stock  
+    - Amperage  
+    - Terminal  
+15. Validar que existe selector de ordenamiento ("Más relevantes").  
+16. Verificar existencia de botón "IR A COMPRA ASISTIDA" en la parte superior derecha.  
+17. Validar paginación: Se muestran 21 productos por página.  
+
+**Resultado Esperado**  
+- Búsqueda se ejecuta correctamente  
+- Todos los productos mostrados están en stock  
+- Información de productos se muestra completa y correctamente formateada  
+- Filtros y opciones de ordenamiento están disponibles y funcionales  
+- Paginación está disponible para acceder a más productos  
+- Los precios se muestran con IVA incluido  
+- Envío gratis está disponible para todos los productos  
+- El formulario de "Compra Asistida" está accesible  
+- No hay errores en la carga de la página
+
+**Notas Adicionales**  
+- El repuesto "disco de freno" existe en la base de datos con múltiples variantes según marca y modelo  
+- Se validó especialmente que los discos de freno para Mercedes-Benz están disponibles  
+- La búsqueda por autocompletado mejora la experiencia del usuario  
+- El sistema soporta paginación eficiente para los 357 resultados encontrados

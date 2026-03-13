@@ -51,6 +51,36 @@ export const selectors = {
     goToCartButton: (page: Page) =>
       page.getByRole("button", { name: /ir al carrito/i }),
   },
+  search: {
+    searchInput: (page: Page) =>
+      page.getByPlaceholder(/nombre o código de repuesto/i),
+    autocompleteDropdown: (page: Page) => page.getByRole("dialog"),
+    autocompleteOption: (page: Page, text: string) =>
+      page.getByRole("option", { name: new RegExp(text, "i") }),
+  },
+  searchResults: {
+    heading: (page: Page) => page.getByRole("heading", { level: 1 }),
+    resultsCount: (page: Page) => page.getByText(/\d+\s+resultados/),
+    filtersPanel: (page: Page) => page.getByRole("region").first(),
+    filterButton: (page: Page, name: string) =>
+      page
+        .getByRole("region")
+        .first()
+        .getByRole("button", { name: new RegExp(`^${name}`, "i") }),
+    sortButton: (page: Page) =>
+      page.getByRole("button", { name: /más relevantes/i }),
+    assistedPurchaseButton: (page: Page) =>
+      page.locator("cx-assisted-purchase").getByText(/ir a compra asistida/i),
+    productCards: (page: Page) =>
+      page
+        .getByRole("region")
+        .last()
+        .getByRole("link")
+        .filter({ hasText: /en stock|pocas unidades/i }),
+    pagination: (page: Page) =>
+      page.getByRole("navigation", { name: /page navigation/i }),
+    paginationInfo: (page: Page) => page.getByText(/mostrando/i),
+  },
   cart: {
     heading: (page: Page) =>
       page.getByRole("heading", { name: /tu carro/i }),

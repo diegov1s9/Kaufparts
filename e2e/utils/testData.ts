@@ -65,6 +65,36 @@ export const infoLinks = [
   },
 ];
 
+export const search = {
+  discoDeFreno: {
+    term: "disco de freno",
+    autocompleteResult: "disco de frenos",
+    expectedTitle: "disco de frenos",
+    expectedResultsText: "357 resultados",
+    expectedUrlPattern: /search\/disco%20de%20frenos/,
+    directSearchUrl: "/search/disco%20de%20frenos?query=disco%20de%20frenos",
+    productsPerPage: 21,
+    paginationText: /mostrando 1.21 de \d+ productos/i,
+    expectedFilters: [
+      "Categoría",
+      "Subcategoría",
+      "Marca",
+      "Modelo",
+      "Año",
+      "Ancho",
+      "Perfil",
+      "Radio",
+      "Formato del envase",
+      "ofertas",
+      "CCA",
+      "volts",
+      "Estado de stock",
+      "Amperage",
+      "Terminal",
+    ],
+  },
+};
+
 export const products = {
   bombaCirculacionAgua: {
     id: "A00989",
