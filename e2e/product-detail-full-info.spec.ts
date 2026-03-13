@@ -2,8 +2,8 @@ import { test, expect } from "@playwright/test";
 import { selectors } from "./utils/selectors";
 import { products } from "./utils/testData";
 
-test.describe("Validar ficha de producto completa", () => {
-  test("TC-E2E-: Validar ficha de producto completa", async ({ page }) => {
+test.describe("TC-E2E-001: Validar ficha de producto completa", () => {
+  test("TC-E2E-001: Validar ficha de producto completa", async ({ page }) => {
     const product = products.sensorDistanceParktronic;
 
     await page.goto(product.url);

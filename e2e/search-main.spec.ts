@@ -4,7 +4,7 @@ import { qas, search } from "./utils/testData";
 
 const data = search.discoDeFreno;
 
-test.describe("TC-E2E-001: Validar búsqueda de repuesto desde el buscador principal", () => {
+test.describe("TC-E2E-005: Validar búsqueda de repuesto desde el buscador principal", () => {
   test("SRC-001/002: Buscador principal es visible con placeholder correcto", async ({
     page,
   }) => {
