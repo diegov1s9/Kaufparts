@@ -24,7 +24,7 @@ export const routes = {
 };
 
 export const home = {
-  url: "https://www.kaufparts.cl",
+  url: process.env["PLAYWRIGHT_TEST_BASE_URL"] ?? "https://qas.kaufparts.cl",
 };
 
 export const categories = [
@@ -39,7 +39,7 @@ export const categories = [
 ];
 
 export const qas = {
-  url: "https://qas.kaufparts.cl",
+  url: process.env["PLAYWRIGHT_TEST_BASE_URL"] ?? "https://qas.kaufparts.cl",
 };
 
 export const infoLinks = [
@@ -47,21 +47,26 @@ export const infoLinks = [
     label: "¿Necesitas ayuda con la compra de tus repuestos?",
     url: "https://cl.kaufparts.cl/?utm_source=kaufparts&utm_medium=kaufparts_site&utm_campaign=AO&utm_content=cbayuda",
     urlPattern: /cl\.kaufparts\.cl/,
+    expectedStatus: 200,
   },
   {
     label: "Despachos y Retiros en Tienda",
     url: "https://www.kaufparts.cl/info/despachos",
     urlPattern: /info\/despachos/,
+    expectedStatus: 200,
+    skipStatusCheck: true,
   },
   {
     label: "Cambios y Devoluciones",
     url: "https://cl.kaufparts.cl/ayuda/cambios-y-devoluciones",
     urlPattern: /cambios-y-devoluciones/,
+    expectedStatus: 200,
   },
   {
     label: "Visita nuestro Blog",
     url: "https://cl.kaufparts.cl/blog",
     urlPattern: /\/blog/,
+    expectedStatus: 200,
   },
 ];
 

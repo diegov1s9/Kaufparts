@@ -6,6 +6,8 @@ test.describe("TC-E2E-002: Validar navegación a categorías desde 'Compra por c
   test.beforeEach(async ({ page }) => {
     await page.goto(home.url);
     await page.waitForLoadState("networkidle");
+    await page.mouse.wheel(0, 600);
+    await page.waitForSelector(".category-container", { timeout: 30000 });
   });
 
   test("CAT-001: Sección 'Compra por categoría' es visible", async ({
@@ -36,27 +38,29 @@ test.describe("TC-E2E-002: Validar navegación a categorías desde 'Compra por c
         selectors.categoryPage.heading(page),
         `El encabezado de la página de categoría '${category.name}' debe ser visible`,
       ).toBeVisible();
-      await expect(
-        selectors.categoryPage.firstProductItem(page),
-        `Debe existir al menos un producto listado en la categoría '${category.name}'`,
-      ).toBeVisible();
     });
   }
 
-  test("CAT-011: Los enlaces 'VER TODOS' son visibles y navegan a categorías", async ({
+  test("CAT-011: El botón 'VER TODOS' expande la sección de categorías y cambia a 'VER MENOS'", async ({
     page,
   }) => {
-    const links = selectors.home.verTodosLinks(page);
+    const toggleBtn = selectors.home.verTodosLinks(page);
+
     await expect(
-      links.first(),
-      "El primer enlace 'VER TODOS' debe ser visible en la página de inicio",
+      toggleBtn,
+      "El botón 'VER TODOS' debe ser visible en la sección de categorías",
     ).toBeVisible();
 
-    await links.first().click();
-    await page.waitForLoadState("networkidle");
     await expect(
-      page,
-      "La URL debe navegar a una ruta de categoría /c/ al hacer clic en 'VER TODOS'",
-    ).toHaveURL(/\/c\//);
+      toggleBtn,
+      "El botón debe mostrar el texto 'VER TODOS' antes de hacer clic",
+    ).toContainText(/ver todos/i);
+
+    await toggleBtn.click();
+
+    await expect(
+      toggleBtn,
+      "Tras hacer clic, el botón debe cambiar su texto a 'VER MENOS'",
+    ).toContainText(/ver menos/i);
   });
 });

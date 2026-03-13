@@ -8,15 +8,15 @@ import { Page } from "@playwright/test";
 export const selectors = {
   home: {
     categoriesSection: (page: Page) =>
-      page.getByRole("heading", { name: /compra por categor/i }),
+      page.locator(".categories-container h3"),
     categoriesList: (page: Page) =>
-      page.getByRole("list", { name: /categorías/i }),
+      page.locator(".category-container[role='list']"),
     categoryButton: (page: Page, name: string) =>
       page
-        .getByRole("list", { name: /categorías/i })
-        .getByRole("button", { name: new RegExp(name, "i") }),
+        .locator(".category-container")
+        .locator("a.category-item", { hasText: new RegExp(name, "i") }),
     verTodosLinks: (page: Page) =>
-      page.getByRole("link", { name: /ver todos/i }),
+      page.locator("a.mobile-carousel-link"),
   },
   header: {
     infoNavList: (page: Page) => page.locator(".custom-links__list"),
@@ -54,9 +54,13 @@ export const selectors = {
   search: {
     searchInput: (page: Page) =>
       page.getByPlaceholder(/nombre o código de repuesto/i),
-    autocompleteDropdown: (page: Page) => page.getByRole("dialog"),
+    autocompleteDropdown: (page: Page) =>
+      page.getByRole("listbox", { name: /escribiendo sugerencias/i }),
     autocompleteOption: (page: Page, text: string) =>
-      page.getByRole("option", { name: new RegExp(text, "i") }),
+      page
+        .getByRole("listbox")
+        .getByRole("option", { name: new RegExp(text, "i") })
+        .first(),
   },
   searchResults: {
     heading: (page: Page) => page.getByRole("heading", { level: 1 }),

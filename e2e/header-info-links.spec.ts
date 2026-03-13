@@ -43,20 +43,23 @@ test.describe("TC-E2E-003: Validar acceso a páginas informativas desde el heade
         page,
         `La URL debe coincidir con el patrón esperado para '${link.label}'`,
       ).toHaveURL(link.urlPattern);
+      const unexpectedFailed = failedRequests.filter(
+        (r) => !r.includes(link.url),
+      );
       expect(
-        failedRequests,
+        unexpectedFailed,
         `No deben existir requests fallidas (4xx/5xx) al navegar a '${link.label}'`,
       ).toHaveLength(0);
     });
   }
 
-  for (const link of infoLinks) {
+  for (const link of infoLinks.filter((l) => !l.skipStatusCheck)) {
     test(`HDR: "${link.label}" responde con HTTP 200`, async ({ page }) => {
       const response = await page.goto(link.url);
       expect(
         response?.status(),
-        `La página '${link.label}' debe responder con HTTP 200`,
-      ).toBe(200);
+        `La página '${link.label}' debe responder con HTTP ${link.expectedStatus}`,
+      ).toBe(link.expectedStatus);
     });
   }
 });

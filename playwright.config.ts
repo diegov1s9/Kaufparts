@@ -46,7 +46,7 @@ export default defineConfig({
   ],
   use: {
     baseURL:
-      process.env["PLAYWRIGHT_TEST_BASE_URL"] ?? "https://www.kaufmann.cl",
+      process.env["PLAYWRIGHT_TEST_BASE_URL"] ?? "https://qas.kaufparts.cl",
     video: {
       mode: "on",
       size: { width: 1920, height: 1080 },
