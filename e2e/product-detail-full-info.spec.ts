@@ -11,32 +11,43 @@ test.describe("Validar ficha de producto completa", () => {
 
     await expect(
       selectors.productDetail.internalDescription(page),
+      `La descripción interna debe mostrar la marca y código '${product.brand} | ${product.id}'`,
     ).toContainText(`Mercedes Benz | ${product.id}`);
 
-    await expect(selectors.productDetail.title(page)).toContainText(
-      product.name,
-    );
+    await expect(
+      selectors.productDetail.title(page),
+      `El título del producto debe contener '${product.name}'`,
+    ).toContainText(product.name);
 
     const formattedCurrentPrice = product.currentPrice
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-    await expect(selectors.productDetail.currentPrice(page)).toContainText(
-      formattedCurrentPrice,
-    );
+    await expect(
+      selectors.productDetail.currentPrice(page),
+      `El precio actual debe mostrarse formateado como $${formattedCurrentPrice}`,
+    ).toContainText(formattedCurrentPrice);
 
-    await expect(selectors.productDetail.installmentsText(page)).toContainText(
-      `${product.installmentsCount} cuotas`,
-    );
+    await expect(
+      selectors.productDetail.installmentsText(page),
+      `El texto de cuotas debe indicar '${product.installmentsCount} cuotas'`,
+    ).toContainText(`${product.installmentsCount} cuotas`);
 
-    await expect(selectors.productDetail.stockStatus(page)).toContainText(
-      product.stockStatus,
-    );
+    await expect(
+      selectors.productDetail.stockStatus(page),
+      `El estado de stock debe mostrar '${product.stockStatus}'`,
+    ).toContainText(product.stockStatus);
 
     const quantitySelect = selectors.productDetail.quantitySelect(page);
-    await expect(quantitySelect).toHaveValue("1");
+    await expect(
+      quantitySelect,
+      "El selector de cantidad debe iniciar en 1 al cargar la página",
+    ).toHaveValue("1");
 
     await quantitySelect.selectOption("5");
-    await expect(quantitySelect).toHaveValue("5");
+    await expect(
+      quantitySelect,
+      "El selector de cantidad debe reflejar el valor 5 tras seleccionarlo",
+    ).toHaveValue("5");
   });
 });

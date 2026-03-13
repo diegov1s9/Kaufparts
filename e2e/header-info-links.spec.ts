@@ -11,11 +11,15 @@ test.describe("TC-E2E-003: Validar acceso a páginas informativas desde el heade
   test("HDR-001: Los 4 enlaces informativos son visibles en el header", async ({
     page,
   }) => {
-    await expect(selectors.header.infoNavList(page)).toBeVisible();
+    await expect(
+      selectors.header.infoNavList(page),
+      "La barra de navegación informativa debe ser visible en el header",
+    ).toBeVisible();
 
     for (const link of infoLinks) {
       await expect(
         selectors.header.infoLink(page, link.label),
+        `El enlace '${link.label}' debe ser visible en el header`,
       ).toBeVisible();
     }
   });
@@ -35,15 +39,24 @@ test.describe("TC-E2E-003: Validar acceso a páginas informativas desde el heade
       await selectors.header.infoLink(page, link.label).click();
       await page.waitForLoadState("networkidle");
 
-      await expect(page).toHaveURL(link.urlPattern);
-      expect(failedRequests).toHaveLength(0);
+      await expect(
+        page,
+        `La URL debe coincidir con el patrón esperado para '${link.label}'`,
+      ).toHaveURL(link.urlPattern);
+      expect(
+        failedRequests,
+        `No deben existir requests fallidas (4xx/5xx) al navegar a '${link.label}'`,
+      ).toHaveLength(0);
     });
   }
 
   for (const link of infoLinks) {
     test(`HDR: "${link.label}" responde con HTTP 200`, async ({ page }) => {
       const response = await page.goto(link.url);
-      expect(response?.status()).toBe(200);
+      expect(
+        response?.status(),
+        `La página '${link.label}' debe responder con HTTP 200`,
+      ).toBe(200);
     });
   }
 });
