@@ -567,3 +567,110 @@ Pendiente. RUT ya no permite ingresar al entorno QAS.
 
 ---
 
+
+## TC-E2E-009: Búsqueda de repuestos filtrando por marca, modelo y año
+
+**TC ID**  
+TC-E2E-009
+
+**Descripción**  
+Validar la búsqueda de repuestos filtrando por marca, modelo y año del vehículo desde el formulario principal de kaufparts.cl
+
+**Proceso de Negocio**  
+Búsqueda de Repuestos
+
+**Sub-Proceso**  
+Búsqueda por especificaciones de vehículo (Marca > Modelo > Año)
+
+**Prioridad**  
+Alta
+
+**Datos de Prueba**  
+- Marca: Mercedes-Benz  
+- Modelo: TestA (o cualquier modelo disponible según la BD)  
+- Año: 2021  
+- Combinación esperada: Debe existir al menos 1 repuesto compatible
+
+### Pasos de la Prueba
+1. Ingresar a https://qas.kaufparts.cl/.  
+2. Visualizar página de inicio completamente cargada.  
+3. Localizar formulario de filtrado con campos: Marca, Modelo, Año y botón BUSCAR.  
+4. Verificar que el campo Marca está habilitado.  
+5. Hacer clic en campo Marca (combobox con placeholder "Marca").  
+6. Verificar que se abre dropdown con lista de marcas disponibles.  
+7. Seleccionar Mercedes-Benz de la lista.  
+8. Verificar que campo Modelo se habilita automáticamente.  
+9. Verificar que campo Año permanece deshabilitado hasta seleccionar modelo.  
+10. Hacer clic en campo Modelo (combobox con placeholder "Modelo").  
+11. Verificar que se abre dropdown con modelos disponibles para Mercedes-Benz.  
+12. Seleccionar un modelo disponible (ej: TestA, Clase A, Clase C, etc.).  
+13. Verificar que campo Año se habilita automáticamente.  
+14. Hacer clic en campo Año (combobox con placeholder "Año").  
+15. Verificar que se abre dropdown con años disponibles para la marca y modelo seleccionados.  
+16. Seleccionar un año disponible (ej: 2021).  
+17. Verificar que botón BUSCAR está habilitado (color azul, no gris).  
+18. Hacer clic en botón BUSCAR.  
+19. Aguardar carga de página de resultados.  
+20. Verificar que la URL cambió a formato: `/search?query=:relevance:vehicleBrand:{marca}:vehicleModel:{modelo}:vehicleYear:{año}`.  
+21. Verificar que el título de la página muestra: "{Marca} {Modelo} {Año}".  
+22. Validar que se muestran los filtros aplicados como "chips" (etiquetas removibles):  
+    - Chip con "Mercedes-Benz" y botón X  
+    - Chip con "TestA" y botón X  
+    - Chip con "2021" y botón X  
+23. Verificar que existe filtro adicional "Modelo" disponible en panel izquierdo.  
+
+### Comportamiento condicional
+- Si hay resultados:  
+  - Validar que se muestran repuestos compatibles con la combinación.  
+  - Verificar que cada producto contiene: nombre, marca, código, precio, descuento.  
+  - Validar que todos están disponibles (EN STOCK).  
+  - Confirmar envío gratis y opciones de pago en cuotas.  
+- Si no hay resultados:  
+  - Validar mensaje "No encontramos lo que buscas".  
+  - Verificar que se muestra enlace a "compra asistida Online".  
+  - Confirmar que botón "IR A COMPRA ASISTIDA" está visible y es funcional.  
+
+### Validaciones de comportamiento progresivo
+- Campo Marca habilitado inicialmente.  
+- Campo Modelo deshabilitado hasta seleccionar Marca.  
+- Campo Año deshabilitado hasta seleccionar Modelo.  
+- Botón BUSCAR deshabilitado hasta seleccionar los 3 campos.  
+
+### Dropdowns y estados UI
+- Dropdown Marca: muestra todas las marcas disponibles.  
+- Dropdown Modelo: muestra solo modelos de la marca seleccionada.  
+- Dropdown Año: muestra solo años disponibles para marca+modelo.  
+- Campos deshabilitados se renderizan con color gris (disabled).  
+- Campos habilitados se renderizan con color blanco/claro (enabled).  
+- Botón BUSCAR cambia de gris a azul cuando todos los campos se completan.
+
+### Resultado esperado
+- Campo Marca está habilitado al cargar la página.  
+- Campo Modelo se habilita al seleccionar Marca.  
+- Campo Año se habilita al seleccionar Modelo.  
+- Botón BUSCAR se habilita solo cuando todos los campos tienen valores.  
+- Dropdown de Marca muestra lista completa de marcas.  
+- Dropdown de Modelo muestra solo modelos de la marca seleccionada.  
+- Dropdown de Año muestra solo años para la combinación marca+modelo.  
+- Búsqueda se ejecuta correctamente al hacer clic en BUSCAR.  
+- URL contiene los parámetros de filtrado correctos.  
+- Página de resultados muestra título con Marca, Modelo y Año seleccionados.  
+- Se muestran "chips" removibles con filtros aplicados.  
+- Si hay resultados, se muestran productos compatibles.  
+- Si no hay resultados, se muestra mensaje amigable y opción de compra asistida.  
+- Los filtros aplicados se pueden remover haciendo clic en X.  
+- Al remover filtros, la búsqueda se actualiza automáticamente.  
+- No hay errores en consola del navegador.  
+- Tiempo de carga de resultados es aceptable (< 3 segundos).
+
+### Notas adicionales
+- El comportamiento de cascada (donde campos posteriores se habilitan progresivamente) es un UX pattern común y facilita la selección correcta del vehículo.  
+- La presencia de "chips" removibles permite al usuario modificar filtros fácilmente sin volver al formulario original.  
+- El sistema muestrea correctamente cuando no hay datos disponibles para una combinación, ofreciendo alternativas (Compra Asistida).  
+- El formulario está ubicado en la sección hero del homepage, permitiendo acceso inmediato.
+
+### Referencias de elementos HTML
+- `mat-form-field` con placeholder="Marca" (ref_12019).  
+- `mat-form-field` con placeholder="Modelo" (ref_12020).  
+- `mat-form-field` con placeholder="Año" (ref_12021).  
+- `button` con texto "BUSCAR" (ref_12038).
