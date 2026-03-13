@@ -38,6 +38,33 @@ export const categories = [
   { name: "Transmisión y Tracción", code: "KC02" },
 ];
 
+export const qas = {
+  url: "https://qas.kaufparts.cl",
+};
+
+export const infoLinks = [
+  {
+    label: "¿Necesitas ayuda con la compra de tus repuestos?",
+    url: "https://cl.kaufparts.cl/?utm_source=kaufparts&utm_medium=kaufparts_site&utm_campaign=AO&utm_content=cbayuda",
+    urlPattern: /cl\.kaufparts\.cl/,
+  },
+  {
+    label: "Despachos y Retiros en Tienda",
+    url: "https://www.kaufparts.cl/info/despachos",
+    urlPattern: /info\/despachos/,
+  },
+  {
+    label: "Cambios y Devoluciones",
+    url: "https://cl.kaufparts.cl/ayuda/cambios-y-devoluciones",
+    urlPattern: /cambios-y-devoluciones/,
+  },
+  {
+    label: "Visita nuestro Blog",
+    url: "https://cl.kaufparts.cl/blog",
+    urlPattern: /\/blog/,
+  },
+];
+
 export const products = {
   sensorDistanceParktronic: {
     id: "A01566",

@@ -18,6 +18,13 @@ export const selectors = {
     verTodosLinks: (page: Page) =>
       page.getByRole("link", { name: /ver todos/i }),
   },
+  header: {
+    infoNavList: (page: Page) => page.locator(".custom-links__list"),
+    infoLink: (page: Page, label: string) =>
+      page
+        .locator(".custom-links__list")
+        .getByRole("link", { name: new RegExp(label, "i") }),
+  },
   categoryPage: {
     heading: (page: Page) => page.getByRole("heading", { level: 1 }),
     firstProductItem: (page: Page) =>

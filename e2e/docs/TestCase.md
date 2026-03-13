@@ -177,31 +177,9 @@ Alta
 - ✓ Confirmación con detalle de cuotas generada
 - ✓ Email con resumen de pagos recibido
 
-Trabajando ...
-Escenario: Validar todos los enlaces de navegación en sección "Compra por categoría"
-
-Dado que estoy en el home de Kaufparts
-Y visualizo la sección "Compra por categoría"
-Cuando hago clic en cada categoría disponible:
-| Categoría | Referencias esperadas |
-| Fluidos y Lubricantes | Debe cargar listado de productos |
-| Baterías | Debe cargar listado de productos |
-| Neumáticos | Debe cargar listado de productos |
-| Boutique y Merchandising | Debe cargar listado de productos |
-| Rodados | Debe cargar listado de productos |
-| Accesorios y Mantenimiento | Debe cargar listado de productos |
-| Sistema de Frenos | Debe cargar listado de productos |
-| Transmisión y Tracción | Debe cargar listado de productos |
-Entonces cada enlace debe:
-
-- Navegar a la categoría correcta
-- Cargar sin errores HTTP
-- Mostrar productos relacionados
-- URL contiene el código de categoría esperado (KC10, KC05, KC09, etc.)
-
 ---
 
-TC-E2E-001: Validar ficha de producto completa
+TC-E2E-001: Validar información del producto seleccionado
 
 **TC ID**
 
@@ -339,3 +317,71 @@ Categorías a validar:
 **Notas**
 
 Parametrizado para validar múltiples categorías. Cada categoría se valida con una carga de página independiente.
+
+
+## TC‑E2E‑003: Validar acceso a páginas informativas desde el encabezado (Header)
+
+**TC ID**  
+TC‑E2E‑003
+
+**Descripción**  
+Validar que el usuario pueda acceder correctamente a todas las páginas informativas desde los enlaces ubicados en la parte superior (header) del sitio web.
+
+**Proceso de Negocio**  
+Comercio Electrónico
+
+**Sub‑Proceso**  
+Navegación por Páginas Informativas
+
+**Prioridad**  
+Media
+
+### Datos de Prueba
+
+Enlaces informativos a validar:
+
+| Enlace                                                            | URL                                                       | Dominio Destino        |
+|------------------------------------------------------------------|-----------------------------------------------------------|------------------------|
+| ¿Necesitas ayuda con la compra de tus repuestos?                 | https://cl.kaufparts.cl/                                  | cl.kaufparts.cl        |
+| Despachos y Retiros en Tienda                                    | https://www.kaufparts.cl/info/despachos                   | kaufparts.cl           |
+| Cambios y Devoluciones                                           | https://cl.kaufparts.cl/ayuda/cambios-y-devoluciones      | cl.kaufparts.cl        |
+| Visita nuestro Blog                                              | https://cl.kaufparts.cl/blog                              | cl.kaufparts.cl        |
+
+### Pasos de la Prueba
+
+1. Navega a `https://qas.kaufparts.cl/`
+2. Espera carga completa de página (`networkidle`)
+3. Valida que el header sea visible con los 4 enlaces informativos
+4. Para cada enlace informativo:
+   1. Clic en el enlace
+   2. Espera carga de página (`networkidle`)
+   3. Valida que navegue a la URL correcta
+   4. Valida que el contenido se cargue sin errores (status 200)
+   5. Regresa a la página principal
+5. Valida que todos los enlaces son accesibles y funcionales
+
+### Resultado Esperado
+
+| ID      | Validación                                                                                | Estado |
+|--------|--------------------------------------------------------------------------------------------|--------|
+| HDR‑001 | Header es visible con todos los enlaces informativos                                      | PASS   |
+| HDR‑002 | Clic en "¿Necesitas ayuda..." navega a cl.kaufparts.cl sin errores                        | PASS   |
+| HDR‑003 | Clic en "Despachos y Retiros en Tienda" navega a `/info/despachos`                        | PASS   |
+| HDR‑004 | Clic en "Cambios y Devoluciones" navega a `/ayuda/cambios-y-devoluciones`                | PASS   |
+| HDR‑005 | Clic en "Visita nuestro Blog" navega a `/blog`                                           | PASS   |
+| HDR‑006 | Página "¿Necesitas ayuda..." carga contenido correcto                                     | PASS   |
+| HDR‑007 | Página "Despachos y Retiros" muestra información de despachos                            | PASS   |
+| HDR‑008 | Página "Cambios y Devoluciones" muestra información de devoluciones                      | PASS   |
+| HDR‑009 | Página "Blog" carga artículos y contenido sin errores                                    | PASS   |
+| HDR‑010 | Todos los enlaces responden con HTTP 200                                                  | PASS   |
+| HDR‑011 | No hay errores de red al cargar las páginas destino                                      | PASS   |
+
+### Notas
+
+- Los enlaces están organizados en el header navegable (sección superior‑derecha).
+- Cada página destino carga en el mismo navegador (sin ventanas nuevas).
+- Se valida tanto la navegación correcta como la carga del contenido.
+- Este test case puede parametrizarse para validar múltiples enlaces con una estructura única.
+- Los dominios pueden variar entre `kaufparts.cl` y `cl.kaufparts.cl` según la página informativa.
+
+
