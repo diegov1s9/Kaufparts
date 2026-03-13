@@ -66,6 +66,13 @@ export const infoLinks = [
 ];
 
 export const products = {
+  bombaCirculacionAgua: {
+    id: "A00989",
+    name: "Bomba de Circulación del Agua",
+    url: "https://qas.kaufparts.cl/p/A00989",
+    currentPrice: 582089,
+    updatedQty: "3",
+  },
   sensorDistanceParktronic: {
     id: "A01566",
     brand: "Mercedes Benz",

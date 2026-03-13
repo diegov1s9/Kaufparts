@@ -42,5 +42,34 @@ export const selectors = {
       page.locator("p.product-installment-price").first(),
     stockStatus: (page: Page) => page.locator(".badge-stock").first(),
     quantitySelect: (page: Page) => page.getByRole("combobox"),
+    buyButton: (page: Page) =>
+      page.getByRole("button", { name: /^comprar$/i }),
+  },
+  addToCartModal: {
+    heading: (page: Page) =>
+      page.getByRole("heading", { name: /agregado al carrito/i }),
+    goToCartButton: (page: Page) =>
+      page.getByRole("button", { name: /ir al carrito/i }),
+  },
+  cart: {
+    heading: (page: Page) =>
+      page.getByRole("heading", { name: /tu carro/i }),
+    table: (page: Page) =>
+      page.getByRole("table", { name: /shopping cart/i }),
+    quantitySelect: (page: Page) => page.getByRole("combobox"),
+    removeButton: (page: Page) =>
+      page.getByRole("button", { name: /remove product from cart/i }),
+    summaryHeading: (page: Page) =>
+      page.getByRole("heading", { name: /^resumen$/i }),
+    summaryTotalRow: (page: Page) =>
+      page.getByRole("rowheader", { name: /^total:$/i }),
+    interestSection: (page: Page) =>
+      page.getByRole("heading", { name: /también te podría interesar/i }),
+    emptyHeading: (page: Page) =>
+      page.getByRole("heading", { name: /el carro de compras está vacío/i }),
+    emptyText: (page: Page) =>
+      page.getByText(/no tienes productos en tu carrito/i),
+    goToHomeButton: (page: Page) =>
+      page.getByRole("button", { name: /ir al inicio/i }),
   },
 };

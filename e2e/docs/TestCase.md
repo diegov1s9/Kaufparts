@@ -384,4 +384,91 @@ Enlaces informativos a validar:
 - Este test case puede parametrizarse para validar múltiples enlaces con una estructura única.
 - Los dominios pueden variar entre `kaufparts.cl` y `cl.kaufparts.cl` según la página informativa.
 
+---
 
+## TC‑E2E‑004: Validar cambio de cantidad y eliminación de producto desde el resumen del carro
+
+**TC ID**  
+TC‑E2E‑004
+
+**Descripción**  
+Validar que el usuario pueda modificar la cantidad de un producto y eliminarlo del carrito desde la página de resumen del carro.
+
+**Proceso de Negocio**  
+Comercio Electrónico
+
+**Sub‑Proceso**  
+Gestión del Carrito de Compra
+
+**Prioridad**  
+Alta
+
+### Datos de Prueba
+
+Producto seleccionado al azar:
+
+| Nombre del Producto              | SKU/ID | Precio Unitario | Estado    |
+|----------------------------------|--------|-----------------|-----------|
+| Bomba de Circulación del Agua    | A00989 | $582.089        | EN STOCK  |
+
+Cantidades a validar: **1** (inicial), **3** (cambio), **0** (después de eliminar)
+
+### Pasos de la Prueba
+
+1. Navega a `https://qas.kaufparts.cl/`
+2. Espera carga de página (`networkidle`)
+3. Selecciona un producto al azar de la lista de productos disponibles
+4. Verifica que la página del producto cargue correctamente
+5. En el dropdown de cantidad, verifica que el valor inicial sea "1 Unidad"
+6. Haz clic en el botón "COMPRAR"
+7. En el modal "Agregado al carrito", haz clic en "IR AL CARRITO"
+8. Espera carga de la página del carrito (`networkidle`)
+9. Valida que el producto esté visible en la tabla "Tu carrito"
+10. Valida que la cantidad inicial sea 1
+11. Abre el dropdown de cantidad (combobox)
+12. Selecciona "3" del dropdown
+13. Espera actualización del resumen (2‑3 segundos)
+14. Valida que la cantidad ahora sea 3
+15. Valida que el total se haya actualizado (multiplicado por 3)
+16. Valida que el resumen lateral se haya actualizado
+17. Haz clic en el botón "Eliminar" del producto
+18. Espera actualización de la página (2‑3 segundos)
+19. Valida que aparezca el mensaje "El carro de compras está vacío"
+20. Valida que el total del carrito sea $0
+21. Valida que el icono del carrito en el header muestre $0
+
+### Resultado Esperado
+
+| ID      | Validación                                                                    | Estado |
+|---------|-------------------------------------------------------------------------------|--------|
+| CRT‑001 | Producto seleccionado carga correctamente en su página detalle                | PASS   |
+| CRT‑002 | Cantidad inicial en dropdown es "1 Unidad"                                   | PASS   |
+| CRT‑003 | Botón "COMPRAR" está disponible y funciona                                   | PASS   |
+| CRT‑004 | Modal "Agregado al carrito" aparece después de comprar                        | PASS   |
+| CRT‑005 | Botón "IR AL CARRITO" funciona correctamente                                 | PASS   |
+| CRT‑006 | Página del carrito carga con URL `/cart`                                     | PASS   |
+| CRT‑007 | Tabla "Tu carrito" muestra el producto agregado                              | PASS   |
+| CRT‑008 | Cantidad inicial del producto en carrito es 1                                | PASS   |
+| CRT‑009 | Dropdown de cantidad contiene opciones de 1 a 16 unidades                    | PASS   |
+| CRT‑010 | Seleccionar cantidad "3" actualiza el dropdown                               | PENDIENTE |
+| CRT‑011 | Total del producto se actualiza correctamente (x3)                           | PENDIENTE |
+| CRT‑012 | Subtotal en resumen se actualiza correctamente                               | PENDIENTE |
+| CRT‑013 | Ahorros en resumen se actualizan correctamente                               | PENDIENTE |
+| CRT‑014 | Total general se recalcula correctamente                                     | PENDIENTE |
+| CRT‑015 | Botón "Eliminar" es visible y funciona                                       | PASS   |
+| CRT‑016 | Página actualiza después de eliminar producto                                | PASS   |
+| CRT‑017 | Mensaje "El carro de compras está vacío" aparece                             | PASS   |
+| CRT‑018 | Mensaje "No tienes productos en tu carrito de compra" aparece                | PASS   |
+| CRT‑019 | Total del carrito muestra $0                                                 | PASS   |
+| CRT‑020 | Icono del carrito en header muestra $0                                       | PASS   |
+| CRT‑021 | Botón "IR AL INICIO" es visible después de vaciar carrito                   | PASS   |
+| CRT‑022 | Sección "También te podría interesar" se muestra                             | PASS   |
+
+### Notas
+
+- El producto se selecciona al azar de la lista de productos disponibles en el inicio.
+- El cambio de cantidad actualiza inmediatamente el total y el resumen.
+- La eliminación requiere un tiempo de procesamiento de 2‑3 segundos.
+- Este test case valida tanto la actualización dinámica de precios como la gestión completa del carrito.
+- El icono del carrito en el header siempre refleja el total actual del carrito.
+- Cuando se elimina el último producto, el carrito se vacía completamente y muestra un estado alternativo.
