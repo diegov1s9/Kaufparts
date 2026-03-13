@@ -374,6 +374,73 @@ Alta
 
 ---
 
+## TC-E2E-008: Búsqueda por VIN y compra con pago en cuotas
+
+**TC ID**
+
+TC-E2E-008
+
+**Descripción**
+
+Búsqueda por VIN y compra con pago en cuotas
+
+**Proceso de Negocio**
+
+Comercio Electrónico
+
+**Sub-Proceso**
+
+Búsqueda VIN + Pago Cuotas
+
+**Prioridad**
+
+Alta
+
+**Datos de Prueba**
+
+- VIN: W1NFB1KB3PA850095
+- Vehiculo: MERCEDES-BENZ
+- Modelo: GLE 300 d 4MATIC
+- Producto: Disco de freno delantero
+- Cantidad: 2 unidades
+- Método pago: WebPay 12 cuotas
+
+**Pasos de la Prueba**
+
+1. Iniciar sesión en `https://www.kaufparts.cl`.
+2. En buscador del header, clic en ícono de auto (búsqueda por VIN/Patente).
+3. Ingresar VIN: `WDB9066331N123456`.
+4. Presionar Enter o búsqueda.
+5. Verificar que el sistema identifica el vehículo completo (marca, modelo, año).
+6. Verificar que el catálogo se auto-filtra mostrando repuestos compatibles.
+7. Filtrar por "Frenos" en menú lateral izquierdo.
+8. Localizar y seleccionar "Disco de freno delantero".
+9. Verificar leyenda de compatibilidad con el VIN.
+10. Cambiar cantidad a 2 unidades.
+11. Clic "COMPRAR" > "IR AL CARRITO".
+12. En `/cart`, verificar 2 discos de freno con precio correcto.
+13. Clic "PROCEDER AL PAGO".
+14. Confirmar dirección de despacho.
+15. Seleccionar "Tarjeta de Crédito" (WebPay).
+16. Clic "Pagar".
+17. En WebPay, elegir 12 cuotas sin interés.
+18. Ingresar datos de tarjeta sandbox.
+19. Confirmar pago.
+20. Verificar confirmación con detalle de cuotas.
+
+**Resultado Esperado**
+
+- ✓ Botón "Buscar por patente" visible en el header
+- ✓ Campo de ingreso VIN/patente se despliega al hacer clic
+- ✓ URL contiene `patentId=<VIN>` tras la búsqueda
+- ✓ Heading de resultados muestra el VIN ingresado
+- ✓ Cantidad de resultados compatibles visible
+- ✓ Panel de filtros visible con: Marca, Modelo, Año, Cilindrada, Estado de stock
+- ✓ Selector de ordenamiento "Más relevantes" visible
+- ✓ Botón "IR A COMPRA ASISTIDA" visible
+- ✓ Paginación visible mostrando rango de 21 productos por página
+
+
 ---
 
 ## Backlog / Pendiente de Automatizar
@@ -500,66 +567,3 @@ Pendiente. RUT ya no permite ingresar al entorno QAS.
 
 ---
 
-## TC-E2E-008: Búsqueda por VIN y compra con pago en cuotas
-
-**TC ID**
-
-TC-E2E-008
-
-**Descripción**
-
-Búsqueda por VIN y compra con pago en cuotas
-
-**Proceso de Negocio**
-
-Comercio Electrónico
-
-**Sub-Proceso**
-
-Búsqueda VIN + Pago Cuotas
-
-**Prioridad**
-
-Alta
-
-**Datos de Prueba**
-
-- VIN: W1NFB1KB3PA850095
-- Vehiculo: MERCEDES-BENZ
-- Modelo: GLE 300 d 4MATIC
-- Producto: Disco de freno delantero
-- Cantidad: 2 unidades
-- Método pago: WebPay 12 cuotas
-
-**Pasos de la Prueba**
-
-1. Iniciar sesión en `https://www.kaufparts.cl`.
-2. En buscador del header, clic en ícono de auto (búsqueda por VIN/Patente).
-3. Ingresar VIN: `WDB9066331N123456`.
-4. Presionar Enter o búsqueda.
-5. Verificar que el sistema identifica el vehículo completo (marca, modelo, año).
-6. Verificar que el catálogo se auto-filtra mostrando repuestos compatibles.
-7. Filtrar por "Frenos" en menú lateral izquierdo.
-8. Localizar y seleccionar "Disco de freno delantero".
-9. Verificar leyenda de compatibilidad con el VIN.
-10. Cambiar cantidad a 2 unidades.
-11. Clic "COMPRAR" > "IR AL CARRITO".
-12. En `/cart`, verificar 2 discos de freno con precio correcto.
-13. Clic "PROCEDER AL PAGO".
-14. Confirmar dirección de despacho.
-15. Seleccionar "Tarjeta de Crédito" (WebPay).
-16. Clic "Pagar".
-17. En WebPay, elegir 12 cuotas sin interés.
-18. Ingresar datos de tarjeta sandbox.
-19. Confirmar pago.
-20. Verificar confirmación con detalle de cuotas.
-
-**Resultado Esperado**
-
-- ✓ VIN de 17 caracteres reconocido correctamente
-- ✓ Vehículo identificado con especificaciones
-- ✓ Repuestos compatibles mostrados
-- ✓ 2 discos de freno agregados al carrito
-- ✓ WebPay con 12 cuotas procesado
-- ✓ Confirmación con detalle de cuotas generada
-- ✓ Email con resumen de pagos recibido

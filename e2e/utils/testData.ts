@@ -100,6 +100,23 @@ export const search = {
   },
 };
 
+export const vinSearch = {
+  vin: "W1NFB1KB3PA850095",
+  expectedResultsText: "107 resultados",
+  expectedUrlPattern: /patentId=W1NFB1KB3PA850095/,
+  expectedFilters: ["Marca", "Modelo", "Año", "Cilindrada", "Estado de stock"],
+  paginationText: /mostrando 1.21 de \d+ productos/i,
+};
+
+// Referencia: SKWG67 → MAXUS T90 4X4 AT | RUT cliente: 143758001 | Empresa: AUTO SUMMIT CHILE S A
+export const plateSearch = {
+  plate: "SKWG67",
+  expectedUrlPattern: /patentId=SKWG67/,
+  expectedResultsText: /\d+ resultados/,
+  expectedFilters: ["Estado de stock"],
+  paginationText: /mostrando 1.21 de \d+ productos/i,
+};
+
 export const products = {
   bombaCirculacionAgua: {
     id: "A00989",

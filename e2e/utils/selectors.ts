@@ -51,6 +51,14 @@ export const selectors = {
     goToCartButton: (page: Page) =>
       page.getByRole("button", { name: /ir al carrito/i }),
   },
+  vinSearch: {
+    openButton: (page: Page) =>
+      page.getByRole("button", { name: /buscar por patente/i }),
+    input: (page: Page) =>
+      page.getByRole("textbox", { name: /ingresa.*patente.*vin/i }),
+    searchButton: (page: Page) =>
+      page.getByRole("button", { name: "Buscar repuestos", exact: true }),
+  },
   search: {
     searchInput: (page: Page) =>
       page.getByPlaceholder(/nombre o código de repuesto/i),
